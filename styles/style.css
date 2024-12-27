@@ -1,0 +1,144 @@
+:root {
+    --bg: #262626;
+    --white: #fff;
+    --black: #000;
+    --container-bg: #333;
+    --border: 1px solid var(--white);
+
+    --todo-task-width: 260px;
+    --checkbox-width: 26px;
+    --checkbox-height: 26px;
+}
+body {
+    background-color: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 20px;
+}
+::selection {
+    background-color: var(--white);
+    color: var(--black);
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--container-bg);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--white);
+    max-width: 500px;
+    width: 100%;
+    max-height: 400px;
+}
+.input-field {
+    display: flex;
+    border: var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.input-field .input {
+    padding: 15px;
+    flex-grow: 1;
+    color: var(--white);
+}
+.input-field .input::placeholder {
+    color: #b6b6b6;
+}
+.input-field .add-button {
+    background-color: var(--white);
+    color: var(--black);
+    padding: 10px;
+}
+.todolist {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    overflow-y: auto;
+}
+.todolist::-webkit-scrollbar {
+    width: 3px;
+    background-color: var(--bg);
+}
+.todolist::-webkit-scrollbar-thumb {
+    background-color: #909090;
+}
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.list-item .todo-name {
+    width: calc(var(--todo-task-width) - var(--checkbox-width));
+    flex-grow: 1;
+    word-break: break-word;
+}
+.list-item .todo-name:focus {
+    outline: none;
+    border: var(--border);
+}
+.list-item .todo-btn {
+    color: #909090;
+    align-self: start;
+    margin-top: 5px;
+}
+.list-item .todo-btn:hover {
+    color: var(--white);
+}
+
+/* Checkbox */
+.checkbox {
+    width: var(--checkbox-width);
+    height: var(--checkbox-height);
+    border: var(--border);
+    border-radius: 4px;
+    position: relative;
+    align-self: start;
+}
+.checkbox input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkbox::before,
+.checkbox::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    background-color: #fff;
+    width: 0;
+    transition: 0.1s;
+    transform-origin: left center;
+}
+.checkbox::before {
+    top: 45%;
+    left: 10%;
+    transform: rotate(45deg);
+}
+.checkbox::after {
+    top: 69%;
+    left: 32%;
+    transform: rotate(315deg);
+}
+.checkbox:has(input:checked)::before {
+    width: 9px;
+}
+.checkbox:has(input:checked)::after {
+    width: 20px;
+    transition-delay: 0.1s;
+}
+.checkbox:has(input:not(:checked))::before {
+    transition-delay: 0.1s;
+}
+.checkbox:has(input:not(:checked))::after {
+    transition-delay: 0s;
+}
